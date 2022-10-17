@@ -10,7 +10,7 @@ import Posts from '../components/Index/Posts';
 import Navbr from '../components/All/Navbr';
 import Nrbr from '../components/All/Nrbr';
 import HomePage from '../components/Pages/HomePage';
-import { Container } from '@chakra-ui/react';
+import { Container, Divider } from '@chakra-ui/react';
 
 const Home: NextPage = () => {
   return (
@@ -24,6 +24,7 @@ const Home: NextPage = () => {
         <Container maxW={'2xl'}>
           <Navbar />
           <CreatePost />
+          <Divider mb={2} />
           <Categorybar />
           <Posts />
         </Container>

@@ -1,24 +1,37 @@
-import { Box, Button, Center, HStack, SimpleGrid } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Center,
+  Grid,
+  GridItem,
+  HStack,
+  Show,
+  SimpleGrid,
+  Text,
+} from '@chakra-ui/react';
 
 const Categorybar = () => {
   return (
-    <Box>
-      <Center p={'1'}>
-        {/* <HStack display={{ base: 'none', md: 'inline' }}>
+    <>
+      <Center>
+        <Show above='md'>
+          <HStack>
+            <Button>Most Liked</Button>
+            <Button>Most Disliked</Button>
+            <Button>Most Controversial</Button>
+            <Button>Least Controversial</Button>
+          </HStack>
+        </Show>
+      </Center>
+      <Show below='md'>
+        <SimpleGrid columns={2} spacing={2}>
           <Button>Most Liked</Button>
           <Button>Most Disliked</Button>
           <Button>Most Controversial</Button>
           <Button>Least Controversial</Button>
-        </HStack> */}
-        <SimpleGrid columns={2} spacing={10}>
-          <Box bg='tomato' height='80px'></Box>
-          <Box bg='tomato' height='80px'></Box>
-          <Box bg='tomato' height='80px'></Box>
-          <Box bg='tomato' height='80px'></Box>
-          <Box bg='tomato' height='80px'></Box>
         </SimpleGrid>
-      </Center>
-    </Box>
+      </Show>
+    </>
   );
 };
 export default Categorybar;
