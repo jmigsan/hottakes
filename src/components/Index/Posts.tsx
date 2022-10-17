@@ -14,11 +14,9 @@ const Posts = () => {
               {posts.data?.map((post) => (
                 <Link href={`/post/${post.id}`} key={post.id}>
                   <Box bg={'gray.200'} p={3} rounded={'lg'}>
-                    <>
-                      <Text fontSize={'2xl'}>{post.title}</Text>
-                      <Text>{post.createdAt.toDateString()}</Text>
-                      <Text>{post.authorId}</Text>
-                    </>
+                    <Text fontSize={'2xl'}>{post.title}</Text>
+                    <Text>{post.createdAt.toDateString()}</Text>
+                    <Text>{post.authorId}</Text>
                   </Box>
                 </Link>
               ))}
