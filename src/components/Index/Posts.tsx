@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { trpc } from '../../utils/trpc';
 
 const Posts = () => {
-  const posts = trpc.post.getPosts.useQuery();
+  const posts = trpc.post.displayPosts.useQuery();
 
   return (
     <Box py={'3'}>
@@ -17,7 +17,7 @@ const Posts = () => {
                     <>
                       <Text fontSize={'2xl'}>{post.title}</Text>
                       <Text>{post.createdAt.toDateString()}</Text>
-                      {/* <Text>{post.author}</Text> */}
+                      <Text>{post.authorId}</Text>
                     </>
                   </Box>
                 </Link>

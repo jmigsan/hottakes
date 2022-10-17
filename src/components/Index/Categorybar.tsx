@@ -16,19 +16,19 @@ const Categorybar = () => {
       <Center>
         <Show above='md'>
           <HStack>
-            <Button>Most Liked</Button>
-            <Button>Most Disliked</Button>
-            <Button>Most Controversial</Button>
-            <Button>Least Controversial</Button>
+            <Button colorScheme={'blackAlpha'}>Most Liked</Button>
+            <Button colorScheme={'blackAlpha'}>Most Disliked</Button>
+            <Button colorScheme={'blackAlpha'}>Most Controversial</Button>
+            <Button colorScheme={'blackAlpha'}>Least Controversial</Button>
           </HStack>
         </Show>
       </Center>
       <Show below='md'>
         <SimpleGrid columns={2} spacing={2}>
-          <Button>Most Liked</Button>
-          <Button>Most Disliked</Button>
-          <Button>Most Controversial</Button>
-          <Button>Least Controversial</Button>
+          <Button colorScheme={'blackAlpha'}>Most Liked</Button>
+          <Button colorScheme={'blackAlpha'}>Most Disliked</Button>
+          <Button colorScheme={'blackAlpha'}>Most Controversial</Button>
+          <Button colorScheme={'blackAlpha'}>Least Controversial</Button>
         </SimpleGrid>
       </Show>
     </>

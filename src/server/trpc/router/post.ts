@@ -2,9 +2,16 @@ import { router, publicProcedure, protectedProcedure } from '../trpc';
 import { z } from 'zod';
 
 export const postRouter = router({
-  getPosts: publicProcedure.query(({ ctx }) => {
+  displayPosts: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.post.findMany();
   }),
+  displayPost: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(({ ctx, input }) => {
+      return ctx.prisma.post.findFirst({
+        where: { id: input.id },
+      });
+    }),
   uploadPost: protectedProcedure
     .input(
       z.object({
@@ -13,7 +20,7 @@ export const postRouter = router({
         authorId: z.string(),
       })
     )
-    .mutation(({ input, ctx }) => {
+    .mutation(({ ctx, input }) => {
       // authorisation begin
       if (!ctx.session.user.id) {
         throw new Error('please sign in');

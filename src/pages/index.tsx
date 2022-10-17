@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { trpc } from '../utils/trpc';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
-import Navbar from '../components/All/Navbar';
 import Categorybar from '../components/Index/Categorybar';
 import CreatePost from '../components/Index/CreatePost';
 import Posts from '../components/Index/Posts';
