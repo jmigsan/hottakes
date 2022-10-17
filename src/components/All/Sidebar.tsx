@@ -9,7 +9,7 @@ import {
   VStack,
   Icon,
   useColorModeValue,
-  Link,
+  Link as ChakraLink,
   Drawer,
   DrawerContent,
   Text,
@@ -31,20 +31,23 @@ import {
   FiMenu,
   FiBell,
   FiChevronDown,
+  FiEdit2,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { ReactText } from 'react';
+import Link from 'next/link';
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  link: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'Home', icon: FiHome, link: '/' },
+  { name: 'Create', icon: FiEdit2, link: '/create' },
+  // { name: 'Explore', icon: FiCompass, link: '/' },
+  // { name: 'Favourites', icon: FiStar, link: '/' },
+  { name: 'Settings', icon: FiSettings, link: '/' },
 ];
 
 export default function SidebarWithHeader({
@@ -104,7 +107,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} link={link.link}>
           {link.name}
         </NavItem>
       ))}
@@ -115,39 +118,43 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactText;
+  link: string;
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+
+const NavItem = ({ icon, children, link, ...rest }: NavItemProps) => {
   return (
-    <Link
-      href='#'
-      style={{ textDecoration: 'none' }}
-      _focus={{ boxShadow: 'none' }}
-    >
-      <Flex
-        align='center'
-        p='4'
-        mx='4'
-        borderRadius='lg'
-        role='group'
-        cursor='pointer'
-        _hover={{
-          bg: ' red.500',
-          color: 'white',
-        }}
-        {...rest}
+    <Link href={link}>
+      <ChakraLink
+        href={link}
+        style={{ textDecoration: 'none' }}
+        _focus={{ boxShadow: 'none' }}
       >
-        {icon && (
-          <Icon
-            mr='4'
-            fontSize='16'
-            _groupHover={{
-              color: 'white',
-            }}
-            as={icon}
-          />
-        )}
-        {children}
-      </Flex>
+        <Flex
+          align='center'
+          p='4'
+          mx='4'
+          borderRadius='lg'
+          role='group'
+          cursor='pointer'
+          _hover={{
+            bg: ' red.500',
+            color: 'white',
+          }}
+          {...rest}
+        >
+          {icon && (
+            <Icon
+              mr='4'
+              fontSize='16'
+              _groupHover={{
+                color: 'white',
+              }}
+              as={icon}
+            />
+          )}
+          {children}
+        </Flex>
+      </ChakraLink>
     </Link>
   );
 };
@@ -179,10 +186,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       <Text
         display={{ base: 'flex', md: 'none' }}
         fontSize='2xl'
-        fontFamily='monospace'
+        fontFamily='heading'
         fontWeight='bold'
       >
-        Logo
+        🔥 Hottakes
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
