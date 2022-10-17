@@ -7,10 +7,9 @@ import Navbar from '../components/All/Navbar';
 import Categorybar from '../components/Index/Categorybar';
 import CreatePost from '../components/Index/CreatePost';
 import Posts from '../components/Index/Posts';
-import Navbr from '../components/All/Navbr';
-import Nrbr from '../components/All/Nrbr';
 import HomePage from '../components/Pages/HomePage';
 import { Container, Divider } from '@chakra-ui/react';
+import Sidebar from '../components/All/Sidebar';
 
 const Home: NextPage = () => {
   return (
@@ -21,14 +20,21 @@ const Home: NextPage = () => {
         <link rel='icon' href='/favicon.ico' />
       </Head>
       <main>
-        <Container maxW={'2xl'}>
-          <Navbar />
-          <CreatePost />
-          <Divider mb={2} />
-          <Categorybar />
-          <Posts />
-        </Container>
+        <Sidebar children={<IndexPage />} />
       </main>
+    </>
+  );
+};
+
+const IndexPage = () => {
+  return (
+    <>
+      <Container maxW={'2xl'}>
+        {/* <CreatePost /> */}
+        {/* <Divider mb={2} /> */}
+        <Categorybar />
+        <Posts />
+      </Container>
     </>
   );
 };
