@@ -11,6 +11,7 @@ const Posts = () => {
         <Box>
           <Center>
             <Stack>
+              {/* get post from chakra templates */}
               {posts.data?.map((post) => (
                 <Link href={`/post/${post.id}`} key={post.id}>
                   <Box bg={'gray.200'} p={3} rounded={'lg'}>

@@ -12,7 +12,7 @@ export const postRouter = router({
         where: { id: input.id },
       });
     }),
-  uploadPost: protectedProcedure
+  createPost: protectedProcedure
     .input(
       z.object({
         title: z.string(),

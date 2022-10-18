@@ -4,7 +4,6 @@ import { trpc } from '../utils/trpc';
 import { signIn, signOut, useSession } from 'next-auth/react';
 
 import Categorybar from '../components/Index/Categorybar';
-import CreatePost from '../components/Index/CreatePost';
 import Posts from '../components/Index/Posts';
 import { Container, Divider } from '@chakra-ui/react';
 import Sidebar from '../components/All/Sidebar';

@@ -32,6 +32,7 @@ export const PostPage = () => {
 
   return (
     <Box>
+      {/* get post from chakra templates */}
       <Text size={'xl'}>{data?.title}</Text>
       <Text>{data?.body}</Text>
       <Text>{data?.createdAt.toDateString()}</Text>
