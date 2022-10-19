@@ -11,14 +11,13 @@ const Posts = () => {
         <Box>
           <Center>
             <Stack>
-              {/* get post from chakra templates */}
               {posts.data?.map((post) => (
                 <Link href={`/post/${post.id}`} key={post.id}>
                   <Box bg={'gray.200'} p={3} rounded={'lg'}>
                     <Text fontSize={'2xl'}>{post.title}</Text>
                     <Text>{post.body}</Text>
                     <Text>{post.createdAt.toDateString()}</Text>
-                    <Text>{post.authorId}</Text>
+                    <Text>{post.user.name}</Text>
                   </Box>
                 </Link>
               ))}

@@ -3,13 +3,22 @@ import { z } from 'zod';
 
 export const postRouter = router({
   displayPosts: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.post.findMany();
+    return ctx.prisma.post.findMany({
+      include: {
+        user: true,
+      },
+    });
   }),
   displayPost: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
       return ctx.prisma.post.findFirst({
-        where: { id: input.id },
+        where: {
+          id: input.id,
+        },
+        include: {
+          user: true,
+        },
       });
     }),
   createPost: protectedProcedure
@@ -35,7 +44,7 @@ export const postRouter = router({
         data: {
           title: input.title,
           body: input.body,
-          authorId: input.authorId,
+          userId: input.authorId,
         },
       });
     }),
