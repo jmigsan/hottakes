@@ -24,7 +24,6 @@ export const postRouter = router({
   createPost: protectedProcedure
     .input(
       z.object({
-        title: z.string(),
         body: z.string(),
         authorId: z.string(),
       })
@@ -42,7 +41,6 @@ export const postRouter = router({
 
       return ctx.prisma.post.create({
         data: {
-          title: input.title,
           body: input.body,
           userId: input.authorId,
         },

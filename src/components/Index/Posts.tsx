@@ -16,7 +16,6 @@ const Posts = () => {
                 // <Link href={`/post/${post.id}`} key={post.id}>
                 <Box key={post.id}>
                   <Box bg={'gray.200'} p={3} rounded={'lg'}>
-                    <Text fontSize={'2xl'}>{post.title}</Text>
                     <Box
                       dangerouslySetInnerHTML={{
                         __html: DOMPurify.sanitize(post.body),

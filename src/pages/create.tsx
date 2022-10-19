@@ -70,22 +70,11 @@ const CreatePage = () => {
   });
 
   const { data: sessionData } = useSession();
-  const [title, setTitle] = useState('');
   const [body, setBody] = useState('<p></p>');
   const router = useRouter();
 
   const createPost = () => {
     const sanitisedBody = DOMPurify.sanitize(body);
-
-    if (title.trim() === '') {
-      toast({
-        title: 'Write your title!',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      });
-      return;
-    }
 
     if (sanitisedBody === '<p></p>') {
       toast({
@@ -100,7 +89,6 @@ const CreatePage = () => {
     console.log('yoooo');
 
     createPostMutation.mutate({
-      title,
       body: sanitisedBody,
       authorId: sessionData?.user?.id as string,
     });
@@ -129,13 +117,6 @@ const CreatePage = () => {
     <>
       <Container maxW={'2xl'}>
         <Stack>
-          <Input
-            placeholder={'Title'}
-            w={'100%'}
-            onChange={(e) => setTitle(e.target.value)}
-            fontSize={'2xl'}
-            fontWeight={'bold'}
-          />
           <TipTap setState={setBody} />
           <Button colorScheme={'red'} onClick={() => createPost()}>
             Post
