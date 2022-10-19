@@ -16,6 +16,7 @@ const Posts = () => {
                 <Link href={`/post/${post.id}`} key={post.id}>
                   <Box bg={'gray.200'} p={3} rounded={'lg'}>
                     <Text fontSize={'2xl'}>{post.title}</Text>
+                    <Text>{post.body}</Text>
                     <Text>{post.createdAt.toDateString()}</Text>
                     <Text>{post.authorId}</Text>
                   </Box>

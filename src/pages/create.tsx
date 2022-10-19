@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react';
 import Sidebar from '../components/All/Sidebar';
 import { useState } from 'react';
+import TipTap from '../components/Create/TipTap';
 
 const Create: NextPage = () => {
   return (
@@ -125,12 +126,11 @@ const CreatePage = () => {
             placeholder={'Title'}
             w={'100%'}
             onChange={(e) => setTitle(e.target.value)}
+            fontSize={'2xl'}
+            fontWeight={'bold'}
           />
-          <Input
-            placeholder={'Hot take...'}
-            w={'100%'}
-            onChange={(e) => setBody(e.target.value)}
-          />
+          <TipTap setState={setBody} />
+          <Text>{body}</Text>
           <Button colorScheme={'red'} onClick={() => createPost()}>
             Post
           </Button>

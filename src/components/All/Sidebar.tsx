@@ -104,7 +104,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}
     >
       <Flex h='20' alignItems='center' mx='8' justifyContent='space-between'>
-        <Text fontSize='2xl' fontFamily='heading' fontWeight='bold'>
+        <Text
+          fontSize='2xl'
+          fontFamily='heading'
+          fontWeight='bold'
+          cursor={'default'}
+        >
           🔥 Hottakes
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
