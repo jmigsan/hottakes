@@ -41,6 +41,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
+import HeaderSignIn from './Sidebar/HeaderSignIn';
 
 interface LinkItemProps {
   name: string;
@@ -214,7 +215,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           aria-label='open menu'
           icon={<FiBell />}
         /> */}
-        <DynamicSignIn />
+        {/* <DynamicSignIn /> */}
+        <HeaderSignIn />
       </HStack>
     </Flex>
   );

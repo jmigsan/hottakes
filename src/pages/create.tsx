@@ -36,7 +36,7 @@ const Create: NextPage = () => {
 };
 
 const CreatePage = () => {
-  // const createPostMutation = trpc.post.createPost();
+  const createPostMutation = trpc.post.createPost.useMutation();
   const { data: sessionData } = useSession();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -61,13 +61,11 @@ const CreatePage = () => {
     //   screenedTitle = title;
     // }
 
-    // createPostMutation.mutate({
-    //   // title: screenedTitle,
-    //   // body: screenedBody,
-    //   title,
-    //   body,
-    //   authorId: sessionData?.user?.id,
-    // });
+    createPostMutation.mutate({
+      title,
+      body,
+      authorId: sessionData?.user?.id as string,
+    });
 
     router.push('/');
     // utils.invalidate.
