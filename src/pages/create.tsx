@@ -5,8 +5,6 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 // import DOMPurify from 'isomorphic-dompurify';
 import { useRouter } from 'next/router';
 
-import Categorybar from '../components/Index/Categorybar';
-import Posts from '../components/Index/Posts';
 import {
   Box,
   Button,
@@ -16,6 +14,7 @@ import {
   Input,
   Stack,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import Sidebar from '../components/All/Sidebar';
 import { useState } from 'react';
@@ -36,12 +35,43 @@ const Create: NextPage = () => {
 };
 
 const CreatePage = () => {
-  const createPostMutation = trpc.post.createPost.useMutation();
+  const toast = useToast();
+  const utils = trpc.useContext();
+  const createPostMutation = trpc.post.createPost.useMutation({
+    onMutate: () => {
+      toast({
+        title: 'Post uploading',
+        description: 'Please wait',
+        status: 'loading',
+        duration: 100000,
+      });
+    },
+    onError: () => {
+      toast.closeAll();
+      toast({
+        title: 'Post failed',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+    onSettled: () => {
+      utils.post.displayPosts.invalidate();
+      toast.closeAll();
+      toast({
+        title: 'Post uploaded',
+        description: 'Successfully updated a post',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+    },
+  });
+
   const { data: sessionData } = useSession();
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const router = useRouter();
-  // const utils = trpc.useContext()
 
   const createPost = () => {
     // const sanitisedTitle = DOMPurify.sanitize(title);
@@ -68,13 +98,10 @@ const CreatePage = () => {
     });
 
     router.push('/');
-    // utils.invalidate.
   };
 
   // page auth begin
-  const { data: session } = useSession();
-
-  if (!session) {
+  if (!sessionData) {
     return (
       <Box>
         <Container>

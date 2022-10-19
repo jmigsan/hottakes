@@ -1,6 +1,19 @@
-import { Box, Button, Center, HStack, Image } from '@chakra-ui/react';
-import { getProviders, signIn } from 'next-auth/react';
+import {
+  Box,
+  Button,
+  Center,
+  HStack,
+  Image,
+  Flex,
+  Stack,
+  Heading,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react';
+import { getProviders, signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import Sidebar from '../../components/All/Sidebar';
 
 const SignIn: React.FC<{
   providers: {
@@ -14,42 +27,76 @@ const SignIn: React.FC<{
   };
 }> = ({ providers }) => {
   const router = useRouter();
+  const { data: sessionData } = useSession();
 
   if (providers === undefined) {
     return null;
   }
 
+  if (sessionData) {
+    router.push(router.query.callbackUrl as string);
+  }
+
   return (
     <>
-      <Box>
-        <Center>
-          <HStack>
-            <Box>
-              {Object.values(providers).map((provider: any) => (
-                <Box key={provider.name}>
-                  <Button
-                    onClick={() =>
-                      signIn(provider.id, {
-                        callbackUrl: router.query.callbackUrl as string,
-                      })
-                    }
-                  >
-                    Sign in with {provider.name}
-                  </Button>
-                </Box>
-              ))}
-            </Box>
-            <Box w='lg'>
-              <Image src='https://source.unsplash.com/random/?nature,fire' />
-            </Box>
-          </HStack>
-        </Center>
-      </Box>
+      <Head>
+        <title>Hottakes</title>
+        <meta name='description' content='See some spicy takes.' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+      <main>
+        <Sidebar children={<SignInPage providers={providers} />} />
+      </main>
     </>
   );
 };
 
-export default SignIn;
+const SignInPage = ({
+  providers,
+}: {
+  providers: {
+    provider: {
+      id: string;
+      name: string;
+      type: string;
+      callbackUrl: string;
+      signinUrl: string;
+    };
+  };
+}) => {
+  const router = useRouter();
+
+  return (
+    <>
+      <Flex align={'center'} justify={'center'}>
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+          <Stack align={'center'}>
+            <Heading fontSize={'4xl'}>Sign in</Heading>
+            <Text fontSize={'lg'} color={'gray.600'}>
+              to make your hot take 🔥
+            </Text>
+          </Stack>
+          <Center>
+            {Object.values(providers).map((provider) => (
+              <Box key={provider.name}>
+                <Button
+                  onClick={() =>
+                    signIn(provider.id, {
+                      callbackUrl: router.query.callbackUrl as string,
+                    })
+                  }
+                  colorScheme='red'
+                >
+                  Sign in with {provider.name}
+                </Button>
+              </Box>
+            ))}
+          </Center>
+        </Stack>
+      </Flex>
+    </>
+  );
+};
 
 export const getServerSideProps = async () => {
   const providers = await getProviders();
@@ -58,3 +105,5 @@ export const getServerSideProps = async () => {
     props: { providers },
   };
 };
+
+export default SignIn;

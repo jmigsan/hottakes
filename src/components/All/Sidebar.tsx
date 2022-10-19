@@ -38,9 +38,6 @@ import { IconType } from 'react-icons';
 import { ReactText } from 'react';
 import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
-
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
 import HeaderSignIn from './Sidebar/HeaderSignIn';
 
 interface LinkItemProps {
@@ -165,10 +162,6 @@ const NavItem = ({ icon, children, link, ...rest }: NavItemProps) => {
   );
 };
 
-const DynamicSignIn = dynamic(() => import('../All/Sidebar/AccountNavButton'), {
-  suspense: true,
-});
-
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
@@ -215,7 +208,6 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
           aria-label='open menu'
           icon={<FiBell />}
         /> */}
-        {/* <DynamicSignIn /> */}
         <HeaderSignIn />
       </HStack>
     </Flex>

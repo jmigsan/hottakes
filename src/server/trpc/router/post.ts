@@ -25,7 +25,8 @@ export const postRouter = router({
       if (!ctx.session.user.id) {
         throw new Error('please sign in');
       }
-      if (ctx.session.user.id === input.authorId) {
+
+      if (ctx.session.user.id !== input.authorId) {
         throw new Error('unauthorised');
       }
       // authorisation end

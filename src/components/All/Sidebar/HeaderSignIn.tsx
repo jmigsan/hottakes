@@ -12,7 +12,7 @@ import {
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { FiChevronDown } from 'react-icons/fi';
 
-const Auth = () => {
+const HeaderSignIn = () => {
   const { data: sessionData } = useSession();
 
   if (!sessionData) {
@@ -41,6 +41,16 @@ const Auth = () => {
       </Menu>
     );
   }
+
+  return (
+    <HStack>
+      <Avatar size={'sm'} />
+      <Text fontSize='sm'>Loading...</Text>
+      <Box display={{ base: 'none', md: 'flex' }}>
+        <FiChevronDown />
+      </Box>
+    </HStack>
+  );
 };
 
-export default Auth;
+export default HeaderSignIn;
