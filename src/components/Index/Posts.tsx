@@ -13,7 +13,8 @@ const Posts = () => {
           <Center>
             <Stack>
               {posts.data?.map((post) => (
-                <Link href={`/post/${post.id}`} key={post.id}>
+                // <Link href={`/post/${post.id}`} key={post.id}>
+                <Box key={post.id}>
                   <Box bg={'gray.200'} p={3} rounded={'lg'}>
                     <Text fontSize={'2xl'}>{post.title}</Text>
                     <Box
@@ -24,7 +25,8 @@ const Posts = () => {
                     <Text>{post.createdAt.toDateString()}</Text>
                     <Text>{post.user.name}</Text>
                   </Box>
-                </Link>
+                </Box>
+                // </Link>
               ))}
             </Stack>
           </Center>

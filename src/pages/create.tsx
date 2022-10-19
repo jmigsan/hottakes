@@ -137,7 +137,6 @@ const CreatePage = () => {
             fontWeight={'bold'}
           />
           <TipTap setState={setBody} />
-          <Text>{body}</Text>
           <Button colorScheme={'red'} onClick={() => createPost()}>
             Post
           </Button>

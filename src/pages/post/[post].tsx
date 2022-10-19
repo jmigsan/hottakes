@@ -30,6 +30,8 @@ export const PostPage = () => {
   const { postId } = router.query;
   const { data } = trpc.post.displayPost.useQuery({ id: postId as string });
 
+  console.log(data);
+
   return (
     <Box>
       <Text size={'xl'}>{data?.title}</Text>
