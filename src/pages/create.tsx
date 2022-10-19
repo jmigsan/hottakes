@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { trpc } from '../utils/trpc';
 import { signIn, signOut, useSession } from 'next-auth/react';
-// import DOMPurify from 'isomorphic-dompurify';
+import DOMPurify from 'isomorphic-dompurify';
 import { useRouter } from 'next/router';
 
 import {
@@ -71,30 +71,37 @@ const CreatePage = () => {
 
   const { data: sessionData } = useSession();
   const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
+  const [body, setBody] = useState('<p></p>');
   const router = useRouter();
 
   const createPost = () => {
-    // const sanitisedTitle = DOMPurify.sanitize(title);
-    // const sanitisedBody = DOMPurify.sanitize(body);
+    const sanitisedBody = DOMPurify.sanitize(body);
 
-    // let screenedBody = '';
-    // if (sanitisedBody === '<p></p>') {
-    //   screenedBody = '';
-    // } else {
-    //   screenedBody = body;
-    // }
+    if (title.trim() === '') {
+      toast({
+        title: 'Write your title!',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
 
-    // let screenedTitle = '';
-    // if (sanitisedTitle === '<p></p>') {
-    //   screenedTitle = '';
-    // } else {
-    //   screenedTitle = title;
-    // }
+    if (sanitisedBody === '<p></p>') {
+      toast({
+        title: 'Write your take!',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    console.log('yoooo');
 
     createPostMutation.mutate({
       title,
-      body,
+      body: sanitisedBody,
       authorId: sessionData?.user?.id as string,
     });
 

@@ -1,6 +1,7 @@
 import { Box, Center, Image, Stack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { trpc } from '../../utils/trpc';
+import DOMPurify from 'isomorphic-dompurify';
 
 const Posts = () => {
   const posts = trpc.post.displayPosts.useQuery();
@@ -15,7 +16,11 @@ const Posts = () => {
                 <Link href={`/post/${post.id}`} key={post.id}>
                   <Box bg={'gray.200'} p={3} rounded={'lg'}>
                     <Text fontSize={'2xl'}>{post.title}</Text>
-                    <Text>{post.body}</Text>
+                    <Box
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(post.body),
+                      }}
+                    />
                     <Text>{post.createdAt.toDateString()}</Text>
                     <Text>{post.user.name}</Text>
                   </Box>
