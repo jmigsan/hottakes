@@ -4,7 +4,7 @@ import { FiPlus } from 'react-icons/fi';
 
 const FloatingButton = () => {
   return (
-    <Box position={'absolute'} right={'2%'} top={'90%'}>
+    <Box position={'fixed'} right={'2%'} top={'90%'}>
       <Button size={'lg'} colorScheme={'red'}>
         <Link href={'/create'}>
           <HStack>
