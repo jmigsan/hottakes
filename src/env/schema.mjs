@@ -18,6 +18,10 @@ export const serverSchema = z.object({
   ),
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_CLIENT_SECRET: z.string(),
+  BB_BUCKET_NAME: z.string(),
+  BB_ACCESS_KEY: z.string(),
+  BB_SECRET_KEY: z.string(),
+  BB_ENDPOINT: z.string(),
 });
 
 /**
