@@ -22,8 +22,8 @@ import {
 import { Editor, EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Placeholder from '@tiptap/extension-placeholder';
-// import Image from '@tiptap/extension-image';
-// import B2UploadTipTapModal from './B2UploadTipTapModal';
+import Image from '@tiptap/extension-image';
+import B2UploadTipTapModal from './B2UploadTipTapModal';
 
 const MenuBar = ({ editor }: { editor: Editor | null }) => {
   if (!editor) {
@@ -134,7 +134,7 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
         <MdRedo />
       </Button>
       {/* image uploading */}
-      {/* <B2UploadTipTapModal editor={editor} /> */}
+      <B2UploadTipTapModal editor={editor} />
     </SimpleGrid>
   );
 };
