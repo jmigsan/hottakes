@@ -25,6 +25,14 @@ export const theme = extendTheme({
       h4: {
         fontSize: 'md',
       },
+
+      ul: {
+        pl: '6',
+      },
+
+      ol: {
+        pl: '6',
+      },
     },
   },
 });
