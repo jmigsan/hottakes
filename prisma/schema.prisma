@@ -72,3 +72,8 @@ model Post {
     user      User     @relation(fields: [userId], references: [id])
     userId    String
 }
+
+model Image {
+    imageKey String @id
+    alt      String @default("")
+}
