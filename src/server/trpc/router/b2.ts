@@ -8,7 +8,7 @@ export const b2Router = router({
     .input(
       z.object({
         fileType: z.string(),
-        // authorId: z.string(),
+        // userId: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -17,7 +17,7 @@ export const b2Router = router({
         throw new Error('please sign in');
       }
 
-      // if (ctx.session.user.id !== input.authorId) {
+      // if (ctx.session.user.id !== input.userId) {
       //   throw new Error('unauthorised');
       // }
       // authorisation end

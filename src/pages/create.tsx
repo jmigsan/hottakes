@@ -90,7 +90,7 @@ const CreatePage = () => {
 
     createPostMutation.mutate({
       body: sanitisedBody,
-      authorId: sessionData?.user?.id as string,
+      // userId: sessionData?.user?.id as string,
     });
 
     router.push('/');

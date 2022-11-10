@@ -52,7 +52,7 @@ const B2ImageUpload = ({ editor }: { editor: Editor | null }) => {
     },
     onSettled: () => {
       // utils.invalidateQueries(['image.getImages']);
-      utils.image.getImages.invalidate();
+      utils.image.getMyImages.invalidate();
       toast.closeAll();
       toast({
         title: 'Image uploaded',
@@ -74,9 +74,14 @@ const B2ImageUpload = ({ editor }: { editor: Editor | null }) => {
 
     const signedUrl = await getSignedPut.mutateAsync({ fileType: fileType });
 
+    console.log('yo');
+    console.log(signedUrl.uploadUrl, signedUrl.key);
+    console.log('oi');
+    console.log(file);
+
     await axios.put(signedUrl.uploadUrl, file);
 
-    await imageToDB.mutate({ imageKey: signedUrl.key });
+    await imageToDB.mutate({ imageKey: signedUrl.key }); // yo you were about to implement adding author to images but stopped
 
     resetFile();
   };
@@ -93,26 +98,58 @@ const B2ImageUpload = ({ editor }: { editor: Editor | null }) => {
 
   // get db images
   // const dbImages = trpc.useQuery(['image.getImages']);
-  const dbImages = trpc.image.getImages.useQuery();
+  // const dbImages = trpc.image.getImages.useQuery();
+  const dbImages = trpc.image.getMyImages.useQuery();
+  // console.log(dbImages.data);
 
   const addImage = ({ imageKey }: { imageKey: string }) => {
     editor!
       .chain()
       .focus()
       .setImage({
-        src: `https://f004.backblazeb2.com/file/mig-cms-one/${imageKey}`,
+        src: `https://f004.backblazeb2.com/file/hottakesFiles/${imageKey}`,
       })
       .run();
   };
 
   //del image from postgres DB
   // const delImageFromDB = trpc.useMutation(['image.delImageFromDB']);
-  const delImageFromDB = trpc.image.delImageFromDB.useMutation();
+  const delImageFromDB = trpc.image.delImageFromDB.useMutation({
+    onMutate: () => {
+      toast({
+        title: 'Image deleting',
+        description: 'Please wait',
+        status: 'loading',
+        duration: 100000,
+      });
+    },
+    onError: () => {
+      toast.closeAll();
+      toast({
+        title: 'Image delete failed',
+        status: 'error',
+        duration: 7000,
+        isClosable: true,
+      });
+    },
+    onSettled: () => {
+      // utils.invalidateQueries(['image.getImages']);
+      utils.image.getMyImages.invalidate();
+      toast.closeAll();
+      toast({
+        title: 'Image deleted',
+        description: 'Successfully deleted an image',
+        status: 'success',
+        duration: 7000,
+        isClosable: true,
+      });
+    },
+  });
   const delImage = ({ imageKey }: { imageKey: string }) => {
     delImageFromDB.mutate({ imageKey });
   };
 
-  console.log(dbImages.data);
+  // console.log(dbImages.data);
 
   return (
     <>
@@ -129,13 +166,13 @@ const B2ImageUpload = ({ editor }: { editor: Editor | null }) => {
             <Stack>
               <Text fontSize={'2xl'}>Uploaded Images</Text>
               <SimpleGrid columns={4} spacing={2}>
-                {/* {dbImages.data?.map((image: any) => (
+                {dbImages.data?.map((image: any) => (
                   <Box key={image.imageKey}>
                     <Button
                       onClick={() => addImage({ imageKey: image.imageKey })}
                     >
                       <Image
-                        src={`https://f004.backblazeb2.com/file/mig-cms-one/${image.imageKey}`}
+                        src={`https://f004.backblazeb2.com/file/hottakesFiles/${image.imageKey}`}
                       />
                     </Button>
                     <Button
@@ -144,7 +181,7 @@ const B2ImageUpload = ({ editor }: { editor: Editor | null }) => {
                       Delete Image From Database
                     </Button>
                   </Box>
-                ))} */}
+                ))}
               </SimpleGrid>
               <Text fontSize={'2xl'}>Upload an Image</Text>
               <Input

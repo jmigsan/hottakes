@@ -108,23 +108,23 @@ const MenuBar = ({ editor }: { editor: Editor | null }) => {
         <MdFormatListNumbered />
       </Button>
       {/* code block */}
-      <Button
+      {/* <Button
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
         className={editor.isActive('codeBlock') ? 'is-active' : ''}
       >
         <BsCodeSquare />
-      </Button>
+      </Button> */}
       {/* block quote */}
-      <Button
+      {/* <Button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         className={editor.isActive('blockquote') ? 'is-active' : ''}
       >
         <BsChatLeftQuote />
-      </Button>
+      </Button> */}
       {/* line */}
-      <Button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
+      {/* <Button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
         <MdHorizontalRule />
-      </Button>
+      </Button> */}
       {/* undo */}
       <Button onClick={() => editor.chain().focus().undo().run()}>
         <MdUndo />

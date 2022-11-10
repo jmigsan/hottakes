@@ -25,24 +25,25 @@ export const postRouter = router({
     .input(
       z.object({
         body: z.string(),
-        authorId: z.string(),
+        // userId: z.string(),
       })
     )
     .mutation(({ ctx, input }) => {
       // authorisation begin
-      if (!ctx.session.user.id) {
-        throw new Error('please sign in');
-      }
+      // if (!ctx.session.user.id) {
+      //   throw new Error('please sign in');
+      // }
 
-      if (ctx.session.user.id !== input.authorId) {
-        throw new Error('unauthorised');
-      }
+      // if (ctx.session.user.id !== input.userId) {
+      //   throw new Error('unauthorised');
+      // }
       // authorisation end
 
       return ctx.prisma.post.create({
         data: {
           body: input.body,
-          userId: input.authorId,
+          userId: ctx.session.user.id,
+          // userId: input.userId,
         },
       });
     }),

@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import DOMPurify from 'isomorphic-dompurify';
 
-import { Box, Text } from '@chakra-ui/react';
+import { Avatar, Box, HStack, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { trpc } from '../../utils/trpc';
 import Sidebar from '../../components/All/Sidebar';
@@ -35,13 +35,20 @@ export const PostPage = () => {
 
   return (
     <Box>
-      <Box
-        dangerouslySetInnerHTML={{
-          __html: DOMPurify.sanitize(data?.body as string),
-        }}
-      />
-      <Text>{data?.createdAt.toDateString()}</Text>
-      <Text>{data?.user.name}</Text>
+      <Box rounded={'xl'} bg={'gray.200'} p={'4'} minW={'md'}>
+        <HStack pb={'3'}>
+          <Avatar size={'sm'} src={data?.user.image as string} />
+          <Text>{data?.user.name}</Text>
+        </HStack>
+        <Box
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(data?.body as string),
+          }}
+        />
+        <Text fontSize={'sm'} pt={'2'} align={'end'}>
+          {data?.createdAt.toDateString()}
+        </Text>
+      </Box>
     </Box>
   );
 };
