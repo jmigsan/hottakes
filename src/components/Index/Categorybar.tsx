@@ -19,7 +19,7 @@ const Categorybar = () => {
       title: 'Feature not implemented yet',
       description: 'Would sort by most likes',
       status: 'error',
-      duration: 9000,
+      duration: 3000,
       isClosable: true,
     });
   };
@@ -29,7 +29,7 @@ const Categorybar = () => {
       title: 'Feature not implemented yet',
       description: 'Would sort by most dislikes',
       status: 'error',
-      duration: 9000,
+      duration: 3000,
       isClosable: true,
     });
   };
@@ -39,7 +39,7 @@ const Categorybar = () => {
       title: 'Feature not implemented yet',
       description: 'Would sort by lowest ratio of likes to dislikes',
       status: 'error',
-      duration: 9000,
+      duration: 3000,
       isClosable: true,
     });
   };
@@ -49,7 +49,7 @@ const Categorybar = () => {
       title: 'Feature not implemented yet',
       description: 'Would sort by highest ratio of likes to dislikes',
       status: 'error',
-      duration: 9000,
+      duration: 3000,
       isClosable: true,
     });
   };
