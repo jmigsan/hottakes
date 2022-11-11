@@ -4,6 +4,8 @@ import {
   Center,
   HStack,
   Image,
+  Skeleton,
+  Spinner,
   Stack,
   Text,
 } from '@chakra-ui/react';
@@ -20,24 +22,34 @@ const Posts = () => {
         <Box>
           <Center>
             <Stack spacing={'4'}>
-              {posts.data?.map((post) => (
-                <Link href={`/post/${post.id}`} key={post.id}>
-                  <Box rounded={'xl'} bg={'gray.200'} p={'4'} minW={'md'}>
-                    <HStack pb={'3'}>
-                      <Avatar size={'sm'} src={post.user.image as string} />
-                      <Text>{post.user.name}</Text>
-                    </HStack>
+              {posts.data == undefined ? (
+                <Spinner />
+              ) : (
+                posts.data?.map((post) => (
+                  <Link href={`/post/${post.id}`} key={post.id}>
                     <Box
-                      dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(post.body),
-                      }}
-                    />
-                    <Text fontSize={'sm'} pt={'2'} align={'end'}>
-                      {post.createdAt.toDateString()}
-                    </Text>
-                  </Box>
-                </Link>
-              ))}
+                      rounded={'xl'}
+                      bg={'gray.200'}
+                      p={'4'}
+                      minW={'md'}
+                      cursor={'pointer'}
+                    >
+                      <HStack pb={'3'}>
+                        <Avatar size={'sm'} src={post.user.image as string} />
+                        <Text>{post.user.name}</Text>
+                      </HStack>
+                      <Box
+                        dangerouslySetInnerHTML={{
+                          __html: DOMPurify.sanitize(post.body),
+                        }}
+                      />
+                      <Text fontSize={'sm'} pt={'2'} align={'end'}>
+                        {post.createdAt.toDateString()}
+                      </Text>
+                    </Box>
+                  </Link>
+                ))
+              )}
             </Stack>
           </Center>
         </Box>
