@@ -28,9 +28,7 @@ const IndexPage = () => {
   return (
     <>
       <Container maxW={'2xl'}>
-        {/* <CreatePost /> */}
-        {/* <Divider mb={2} /> */}
-        <Categorybar />
+        {/* <Categorybar /> */}
         <Posts />
         <FloatingButton />
       </Container>
